@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace WebAssetManager.Models
 {
@@ -16,18 +17,9 @@ namespace WebAssetManager.Models
             // 在此处添加自定义用户声明
             return userIdentity;
         }
-    }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("LocalConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
+        public string Name { get; set; }
+        public DateTime DateCreated { get; set; }
+        public Portfolio Portfolio { get; set; }
     }
 }

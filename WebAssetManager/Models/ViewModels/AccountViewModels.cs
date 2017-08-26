@@ -65,6 +65,11 @@ namespace WebAssetManager.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(100, ErrorMessage = "{0} 必须至少包含 {1} 个字符。", MinimumLength = 1)]
+        [Display(Name = "名字")]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "电子邮件")]
         public string Email { get; set; }

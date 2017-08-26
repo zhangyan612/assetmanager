@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
@@ -21,7 +20,7 @@ namespace WebAssetManager.Models
     /// </summary>
     public class Position
     {
-        public int AccountNumber { get; set; }
+        public int Id { get; set; }
         public string StockName { get; set; }
         public string Symbol { get; set; }
         public int HoldingAmount { get; set; }
