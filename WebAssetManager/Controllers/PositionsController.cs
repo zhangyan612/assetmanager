@@ -39,14 +39,12 @@ namespace WebAssetManager.Controllers
         // GET: Positions/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId");
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName");
             ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name");
             return View();
         }
 
         // POST: Positions/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PositionId,AccountId,StrategyId,StockName,Symbol,HoldingAmount,SellableAmount,CostPrice,CurrentGain,GainPercent,TotalValue,CurrentPrice,FundNumber")] Position position)
@@ -58,7 +56,7 @@ namespace WebAssetManager.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", position.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", position.AccountId);
             ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", position.StrategyId);
             return View(position);
         }
@@ -75,14 +73,12 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", position.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", position.AccountId);
             ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", position.StrategyId);
             return View(position);
         }
 
         // POST: Positions/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PositionId,AccountId,StrategyId,StockName,Symbol,HoldingAmount,SellableAmount,CostPrice,CurrentGain,GainPercent,TotalValue,CurrentPrice,FundNumber")] Position position)
@@ -93,7 +89,7 @@ namespace WebAssetManager.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", position.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", position.AccountId);
             ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", position.StrategyId);
             return View(position);
         }

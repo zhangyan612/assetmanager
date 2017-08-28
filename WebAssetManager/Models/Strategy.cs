@@ -10,14 +10,15 @@ namespace WebAssetManager.Models
         public int StrategyId { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-
+        public string Description { get; set; }
         public StrategySource Source { get; set; }
         public bool? RequireLogin { get; set; }
-
         public string LoginUserName { get; set; }
         public string Password { get; set; }
-
         public virtual ICollection<Position> Positions { get; set; }
+        public virtual ICollection<Trade> HistoryTrades { get; set; }
+
+
     }
 
 

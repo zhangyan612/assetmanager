@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -192,7 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InvestmentAccountsController.cs" />
+    <Compile Include="Controllers\InvestmentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PortfoliosController.cs" />
     <Compile Include="Controllers\PositionsController.cs" />
@@ -229,8 +232,21 @@
     <Compile Include="Migrations\201708280321286_updateCurrency.Designer.cs">
       <DependentUpon>201708280321286_updateCurrency.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708280621544_addTrade.cs" />
+    <Compile Include="Migrations\201708280621544_addTrade.Designer.cs">
+      <DependentUpon>201708280621544_addTrade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708280630154_updateTrade.cs" />
+    <Compile Include="Migrations\201708280630154_updateTrade.Designer.cs">
+      <DependentUpon>201708280630154_updateTrade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Statistics\AlgorithmPerformance.cs" />
+    <Compile Include="Models\Statistics\Extensions.cs" />
+    <Compile Include="Models\Statistics\PortfolioStatistics.cs" />
     <Compile Include="Models\Strategy.cs" />
+    <Compile Include="Models\Trade.cs" />
+    <Compile Include="Models\Statistics\TradeStatistics.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Portfolio.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -298,26 +314,26 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\InvestmentAccounts\Create.cshtml" />
-    <Content Include="Views\InvestmentAccounts\Delete.cshtml" />
-    <Content Include="Views\InvestmentAccounts\Details.cshtml" />
-    <Content Include="Views\InvestmentAccounts\Edit.cshtml" />
-    <Content Include="Views\InvestmentAccounts\Index.cshtml" />
     <Content Include="Views\Positions\Create.cshtml" />
     <Content Include="Views\Positions\Delete.cshtml" />
     <Content Include="Views\Positions\Details.cshtml" />
     <Content Include="Views\Positions\Edit.cshtml" />
     <Content Include="Views\Positions\Index.cshtml" />
-    <Content Include="Views\Strategies\Create.cshtml" />
-    <Content Include="Views\Strategies\Delete.cshtml" />
-    <Content Include="Views\Strategies\Details.cshtml" />
-    <Content Include="Views\Strategies\Edit.cshtml" />
-    <Content Include="Views\Strategies\Index.cshtml" />
     <Content Include="Views\Portfolios\Create.cshtml" />
     <Content Include="Views\Portfolios\Delete.cshtml" />
     <Content Include="Views\Portfolios\Details.cshtml" />
     <Content Include="Views\Portfolios\Edit.cshtml" />
     <Content Include="Views\Portfolios\Index.cshtml" />
+    <Content Include="Views\Investments\Create.cshtml" />
+    <Content Include="Views\Investments\Delete.cshtml" />
+    <Content Include="Views\Investments\Details.cshtml" />
+    <Content Include="Views\Investments\Edit.cshtml" />
+    <Content Include="Views\Investments\Index.cshtml" />
+    <Content Include="Views\Strategies\Create.cshtml" />
+    <Content Include="Views\Strategies\Delete.cshtml" />
+    <Content Include="Views\Strategies\Details.cshtml" />
+    <Content Include="Views\Strategies\Edit.cshtml" />
+    <Content Include="Views\Strategies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -356,6 +372,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708280321286_updateCurrency.resx">
       <DependentUpon>201708280321286_updateCurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708280621544_addTrade.resx">
+      <DependentUpon>201708280621544_addTrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708280630154_updateTrade.resx">
+      <DependentUpon>201708280630154_updateTrade.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

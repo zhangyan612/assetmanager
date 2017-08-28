@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>All Accounts</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -25,10 +25,10 @@
             @Html.DisplayNameFor(model => model.Balance)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WebUrl)
+            @Html.DisplayNameFor(model => model.Currency)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Returns)
+            @Html.DisplayNameFor(model => model.WebUrl)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -54,10 +54,10 @@
             @Html.DisplayFor(modelItem => item.Balance)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WebUrl)
+            @Html.DisplayFor(modelItem => item.Currency)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Returns)
+            @Html.DisplayFor(modelItem => item.WebUrl)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)

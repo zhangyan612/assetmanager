@@ -14,13 +14,43 @@ namespace WebAssetManager.Models
 
         public string AccountName { get; set; }
         public AccountType Type { get; set; }
-        public decimal? Balance { get; set; }
+        public decimal Balance { get; set; }
         public CurrencySymbols Currency { get; set; }
-
         public string WebUrl { get; set; }
-        public decimal? Returns { get; set; }
 
         public virtual ICollection<Position> Positions { get; set; }
+
+        public decimal Exposure
+        {
+            get
+            {
+                return (from i in Positions select i.TotalValue).Sum();
+            }
+        }
+
+        public decimal AvailableCash
+        {
+            get
+            {
+                return Balance - Exposure;
+            }
+        }
+
+        public decimal ReturnAmount
+        {
+            get
+            {
+                return (from i in Positions select i.CurrentGain).Sum();
+            }
+        }
+
+        public decimal ReturnPercent
+        {
+            get
+            {
+                return ReturnAmount / Balance;
+            }
+        }
 
         /// <summary>
         /// if necessary for login

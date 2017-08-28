@@ -42,9 +42,11 @@ namespace WebAssetManager.Controllers
         }
 
         // POST: Strategies/Create
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
+        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StrategyId,Name,Url,Source,RequireLogin,LoginUserName,Password")] Strategy strategy)
+        public ActionResult Create([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password")] Strategy strategy)
         {
             if (ModelState.IsValid)
             {
@@ -72,9 +74,11 @@ namespace WebAssetManager.Controllers
         }
 
         // POST: Strategies/Edit/5
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
+        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StrategyId,Name,Url,Source,RequireLogin,LoginUserName,Password")] Strategy strategy)
+        public ActionResult Edit([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password")] Strategy strategy)
         {
             if (ModelState.IsValid)
             {

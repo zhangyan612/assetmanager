@@ -20,6 +20,7 @@ namespace WebAssetManager.Models
         public DbSet<InvestmentAccount> InvestmentAccounts { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Strategy> Strategies { get; set; }
+        public DbSet<Trade> Trades { get; set; }
 
 
         public static ApplicationDbContext Create()
