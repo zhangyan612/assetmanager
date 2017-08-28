@@ -20,18 +20,23 @@ namespace WebAssetManager.Models
     /// </summary>
     public class Position
     {
-        public int Id { get; set; }
+        public int PositionId { get; set; }
+        public int AccountId { get; set; }
+        public int? StrategyId { get; set; }
+
         public string StockName { get; set; }
         public string Symbol { get; set; }
         public int HoldingAmount { get; set; }
         public int SellableAmount { get; set; }
-        public decimal CostPrice { get; set; }
-        public decimal CurrentGain { get; set; }
-        public decimal GainPercent { get; set; }
-        public int TotalValue { get; set; }
-        public decimal CurrentPrice { get; set; }
+        public decimal? CostPrice { get; set; }
+        public decimal? CurrentGain { get; set; }
+        public decimal? GainPercent { get; set; }
+        public int? TotalValue { get; set; }
+        public decimal? CurrentPrice { get; set; }
 
         public string FundNumber { get; set; }
 
+        public virtual InvestmentAccount Account { get; set; }
+        public virtual Strategy Strategy { get; set; }
     }
 }

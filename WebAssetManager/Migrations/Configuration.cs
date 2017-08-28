@@ -34,14 +34,14 @@ namespace WebAssetManager.Migrations
             //Add-Migration
             //Update-Database
 
-            var assets = new List<Portfolio>
-            {
-                new Portfolio{ PortfolioId = Guid.NewGuid().ToString(), TotalReturn = 0.23M },
-                new Portfolio{ PortfolioId = Guid.NewGuid().ToString(), TotalReturn = 0.23M },
+            //var assets = new List<Portfolio>
+            //{
+            //    new Portfolio{ PortfolioId = Guid.NewGuid().ToString(), TotalReturn = 0.23M },
+            //    new Portfolio{ PortfolioId = Guid.NewGuid().ToString(), TotalReturn = 0.23M },
 
-            };
-            assets.ForEach(s => context.Portfolios.Add(s));
-            context.SaveChanges();
+            //};
+            //assets.ForEach(s => context.Portfolios.Add(s));
+            //context.SaveChanges();
 
         }
     }

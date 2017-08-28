@@ -13,7 +13,11 @@ namespace WebAssetManager.Models
     {
         public string PortfolioId { get; set; }
         public string UserId { get; set; }
+        public string Name { get; set; }
+        public DateTime CreatedDate { get; set; }
         public decimal? TotalReturn { get; set; }
+
+        //public virtual ApplicationUser User { get; set; }
         public virtual ICollection<InvestmentAccount> Accounts { get; set; }
     }
 }

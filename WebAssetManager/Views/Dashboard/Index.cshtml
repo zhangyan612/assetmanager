@@ -1,10 +1,16 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+
+<div id="PortfolioAccounts">
+    <h4 id="PortfolioName"></h4>
+    <a id="AddAccount invisible" class="btn btn-default">Add Account</a>
+</div>
+
+
+
 
 <p>Watchlist</p>
 <ul>
@@ -45,3 +51,31 @@
 </ul>
 
 <p>Apply indicator on  watchlist</p>
+
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+
+        $.ajax('@Url.Action("GetPortfolio", "Dashboard")', {
+            type: 'get',
+            //data: { subject_id: subject_id },
+            dataType: 'json',
+            success: function (data) {
+                // Insert the html into the page here using ".html(html)"
+                // or a similar method.
+                $("#PortfolioName").text(data['Name']); 
+
+                if (data['Accounts'] == null) {
+                    console.log('No account found');
+                }
+                console.log(data);
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    })
+
+</script>
+}

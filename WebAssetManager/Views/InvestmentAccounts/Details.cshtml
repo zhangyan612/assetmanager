@@ -1,0 +1,83 @@
+﻿@model WebAssetManager.Models.InvestmentAccount
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InvestmentAccount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Portfolio.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Portfolio.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Returns)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Returns)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

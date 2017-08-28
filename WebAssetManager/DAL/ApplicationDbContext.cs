@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace WebAssetManager.Models
 {
@@ -18,11 +19,22 @@ namespace WebAssetManager.Models
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<InvestmentAccount> InvestmentAccounts { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<Strategy> Strategies { get; set; }
 
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+
+        //    modelBuilder.Entity<Portfolio>().MapToStoredProcedures();
+        //}
+
     }
 }

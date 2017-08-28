@@ -192,7 +192,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvestmentAccountsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PortfoliosController.cs" />
+    <Compile Include="Controllers\PositionsController.cs" />
+    <Compile Include="Controllers\StrategiesController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,7 +213,24 @@
     <Compile Include="Migrations\201708260239444_BaseModel.Designer.cs">
       <DependentUpon>201708260239444_BaseModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708260415432_portfolioUpdate.cs" />
+    <Compile Include="Migrations\201708260415432_portfolioUpdate.Designer.cs">
+      <DependentUpon>201708260415432_portfolioUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708261503595_StrategyAdded.cs" />
+    <Compile Include="Migrations\201708261503595_StrategyAdded.Designer.cs">
+      <DependentUpon>201708261503595_StrategyAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708270037352_revert.cs" />
+    <Compile Include="Migrations\201708270037352_revert.Designer.cs">
+      <DependentUpon>201708270037352_revert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708280321286_updateCurrency.cs" />
+    <Compile Include="Migrations\201708280321286_updateCurrency.Designer.cs">
+      <DependentUpon>201708280321286_updateCurrency.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Strategy.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Portfolio.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -277,6 +298,26 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\InvestmentAccounts\Create.cshtml" />
+    <Content Include="Views\InvestmentAccounts\Delete.cshtml" />
+    <Content Include="Views\InvestmentAccounts\Details.cshtml" />
+    <Content Include="Views\InvestmentAccounts\Edit.cshtml" />
+    <Content Include="Views\InvestmentAccounts\Index.cshtml" />
+    <Content Include="Views\Positions\Create.cshtml" />
+    <Content Include="Views\Positions\Delete.cshtml" />
+    <Content Include="Views\Positions\Details.cshtml" />
+    <Content Include="Views\Positions\Edit.cshtml" />
+    <Content Include="Views\Positions\Index.cshtml" />
+    <Content Include="Views\Strategies\Create.cshtml" />
+    <Content Include="Views\Strategies\Delete.cshtml" />
+    <Content Include="Views\Strategies\Details.cshtml" />
+    <Content Include="Views\Strategies\Edit.cshtml" />
+    <Content Include="Views\Strategies\Index.cshtml" />
+    <Content Include="Views\Portfolios\Create.cshtml" />
+    <Content Include="Views\Portfolios\Delete.cshtml" />
+    <Content Include="Views\Portfolios\Details.cshtml" />
+    <Content Include="Views\Portfolios\Edit.cshtml" />
+    <Content Include="Views\Portfolios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +344,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708260239444_BaseModel.resx">
       <DependentUpon>201708260239444_BaseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708260415432_portfolioUpdate.resx">
+      <DependentUpon>201708260415432_portfolioUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708261503595_StrategyAdded.resx">
+      <DependentUpon>201708261503595_StrategyAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708270037352_revert.resx">
+      <DependentUpon>201708270037352_revert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708280321286_updateCurrency.resx">
+      <DependentUpon>201708280321286_updateCurrency.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

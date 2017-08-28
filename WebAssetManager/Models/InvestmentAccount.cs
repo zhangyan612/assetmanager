@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -8,14 +9,18 @@ namespace WebAssetManager.Models
 {
     public class InvestmentAccount
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string UserId { get; set; }
+        public string PortfolioId { get; set; }
+
         public string AccountName { get; set; }
         public AccountType Type { get; set; }
+        public decimal? Balance { get; set; }
+        public CurrencySymbols Currency { get; set; }
+
+        public string WebUrl { get; set; }
+        public decimal? Returns { get; set; }
 
         public virtual ICollection<Position> Positions { get; set; }
-
 
         /// <summary>
         /// if necessary for login
@@ -23,6 +28,7 @@ namespace WebAssetManager.Models
         public string UserName { get; set; }
         public string Password { get; set; }
 
+        public virtual Portfolio Portfolio { get; set; }
     }
 
     public enum AccountType
@@ -47,5 +53,15 @@ namespace WebAssetManager.Models
         /// other cash/liqudity asset
         /// </summary>
         Cash,
+    }
+
+    public enum CurrencySymbols
+    {
+        [Display(Name = "US Dollar")]
+        USDollar,
+        [Display(Name = "Euro")]
+        EUR,
+        [Display(Name = "Chinese Yuan")]
+        CNY
     }
 }

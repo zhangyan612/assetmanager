@@ -20,6 +20,6 @@ namespace WebAssetManager.Models
 
         public string Name { get; set; }
         public DateTime DateCreated { get; set; }
-        public Portfolio Portfolio { get; set; }
+        public string PortfolioId { get; set; }
     }
 }
