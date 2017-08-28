@@ -21,7 +21,8 @@ namespace WebAssetManager.Models
         public DbSet<Position> Positions { get; set; }
         public DbSet<Strategy> Strategies { get; set; }
         public DbSet<Trade> Trades { get; set; }
-
+        public DbSet<WatchList> WatchLists { get; set; }
+        public DbSet<Allocation> Allocations { get; set; }
 
         public static ApplicationDbContext Create()
         {

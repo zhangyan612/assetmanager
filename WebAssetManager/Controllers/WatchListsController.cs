@@ -10,107 +10,112 @@ using WebAssetManager.Models;
 
 namespace WebAssetManager.Controllers
 {
-    public class PortfoliosController : Controller
+    public class WatchListsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Portfolios
+        // GET: WatchLists
         public ActionResult Index()
         {
-            return View(db.Portfolios.ToList());
+            var watchLists = db.WatchLists.Include(w => w.Account);
+            return View(watchLists.ToList());
         }
 
-        // GET: Portfolios/Details/5
-        public ActionResult Details(string id)
+        // GET: WatchLists/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Portfolio portfolio = db.Portfolios.Find(id);
-            if (portfolio == null)
+            WatchList watchList = db.WatchLists.Find(id);
+            if (watchList == null)
             {
                 return HttpNotFound();
             }
-            return View(portfolio);
+            return View(watchList);
         }
 
-        // GET: Portfolios/Create
+        // GET: WatchLists/Create
         public ActionResult Create()
         {
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId");
             return View();
         }
 
-        // POST: Portfolios/Create
+        // POST: WatchLists/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PortfolioId,UserId,Name,CreatedDate,TotalReturn")] Portfolio portfolio)
+        public ActionResult Create([Bind(Include = "Id,StockName,Symbol,Description,AccountId,CreatedDate")] WatchList watchList)
         {
             if (ModelState.IsValid)
             {
-                db.Portfolios.Add(portfolio);
+                db.WatchLists.Add(watchList);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(portfolio);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", watchList.AccountId);
+            return View(watchList);
         }
 
-        // GET: Portfolios/Edit/5
-        public ActionResult Edit(string id)
+        // GET: WatchLists/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Portfolio portfolio = db.Portfolios.Find(id);
-            if (portfolio == null)
+            WatchList watchList = db.WatchLists.Find(id);
+            if (watchList == null)
             {
                 return HttpNotFound();
             }
-            return View(portfolio);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", watchList.AccountId);
+            return View(watchList);
         }
 
-        // POST: Portfolios/Edit/5
+        // POST: WatchLists/Edit/5
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PortfolioId,UserId,Name,CreatedDate,TotalReturn")] Portfolio portfolio)
+        public ActionResult Edit([Bind(Include = "Id,StockName,Symbol,Description,AccountId,CreatedDate")] WatchList watchList)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(portfolio).State = EntityState.Modified;
+                db.Entry(watchList).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(portfolio);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", watchList.AccountId);
+            return View(watchList);
         }
 
-        // GET: Portfolios/Delete/5
-        public ActionResult Delete(string id)
+        // GET: WatchLists/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Portfolio portfolio = db.Portfolios.Find(id);
-            if (portfolio == null)
+            WatchList watchList = db.WatchLists.Find(id);
+            if (watchList == null)
             {
                 return HttpNotFound();
             }
-            return View(portfolio);
+            return View(watchList);
         }
 
-        // POST: Portfolios/Delete/5
+        // POST: WatchLists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Portfolio portfolio = db.Portfolios.Find(id);
-            db.Portfolios.Remove(portfolio);
+            WatchList watchList = db.WatchLists.Find(id);
+            db.WatchLists.Remove(watchList);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

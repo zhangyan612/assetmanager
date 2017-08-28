@@ -109,6 +109,8 @@
             <table class="table">
                 <tr>
                     <th>Stock Name</th>
+                    <th>Holding</th>
+                    <th>Cost Price</th>
                     <th>Current Price</th>
                     <th>Current Gain</th>
                 </tr>
@@ -117,6 +119,12 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => i.StockName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.HoldingAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.CostPrice)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => i.CurrentPrice)
@@ -129,6 +137,92 @@
             </table>
         </dd>
 
+
+        <dt>
+            Total Allocated
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalAllocated)
+        </dd>
+
+        <dt>
+            Allocated Percentage
+        </dt>
+        <dd>
+            @String.Format("{0:P2}", Model.AllocatedPercent)
+        </dd>
+
+
+        <dt>
+            Strategy Traget Allocation
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Amount</th>
+                    <th>Strategy Name</th>
+                </tr>
+                @foreach (var i in Model.Allocations)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.Strategy.Name)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+
+        <dt>
+            Strategy Holdings
+        </dt>
+    @foreach (var i in Model.Allocations)
+    {
+        
+        <dd>
+            <p>@i.Strategy.Name</p>
+            <table class="table">
+                <tr>
+                    <th>Stock Name</th>
+                    <th>Holding</th>
+                    <th>Cost Price</th>
+                    <th>Current Price</th>
+                    <th>Current Gain</th>
+                    <th>Weight</th>
+
+                </tr>
+                @foreach(var a in i.Strategy.Positions){
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.StockName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.HoldingAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.CostPrice)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => a.CurrentPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.CurrentGain)
+                        </td>
+                        <td>
+                            @String.Format("{0:P2}", a.Weight)
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </dd>
+    }
     </dl>
 </div>
 <p>

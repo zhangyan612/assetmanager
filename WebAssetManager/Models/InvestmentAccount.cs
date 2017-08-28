@@ -10,15 +10,17 @@ namespace WebAssetManager.Models
     public class InvestmentAccount
     {
         public int Id { get; set; }
-        public string PortfolioId { get; set; }
-
         public string AccountName { get; set; }
+
+        public string PortfolioId { get; set; }
         public AccountType Type { get; set; }
         public decimal Balance { get; set; }
         public CurrencySymbols Currency { get; set; }
         public string WebUrl { get; set; }
 
         public virtual ICollection<Position> Positions { get; set; }
+        public virtual ICollection<Allocation> Allocations { get; set; }
+
 
         public decimal Exposure
         {
@@ -51,6 +53,23 @@ namespace WebAssetManager.Models
                 return ReturnAmount / Balance;
             }
         }
+
+        public decimal TotalAllocated
+        {
+            get
+            {
+                return (from i in Allocations select i.Amount).Sum();
+            }
+        }
+
+        public decimal AllocatedPercent
+        {
+            get
+            {
+                return TotalAllocated / Balance;
+            }
+        }
+
 
         /// <summary>
         /// if necessary for login

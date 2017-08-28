@@ -18,7 +18,9 @@ namespace WebAssetManager.Models
         public virtual ICollection<Position> Positions { get; set; }
         public virtual ICollection<Trade> HistoryTrades { get; set; }
 
-
+        //In case needed by strategy
+        public decimal InitialBalance { get; set; }
+        //public decimal CurrentBalance { get; set; }
     }
 
 

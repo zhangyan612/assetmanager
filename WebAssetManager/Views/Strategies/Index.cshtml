@@ -27,12 +27,6 @@
         <th>
             @Html.DisplayNameFor(model => model.RequireLogin)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LoginUserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
         <th></th>
     </tr>
 
@@ -52,12 +46,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RequireLogin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoginUserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.StrategyId }) |

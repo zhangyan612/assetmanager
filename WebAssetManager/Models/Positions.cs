@@ -21,7 +21,7 @@ namespace WebAssetManager.Models
     public class Position
     {
         public int PositionId { get; set; }
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
         public int? StrategyId { get; set; }
 
         public string StockName { get; set; }
@@ -32,6 +32,9 @@ namespace WebAssetManager.Models
         public int SellableAmount { get; set; }
         public decimal CostPrice { get; set; }
         public decimal CurrentPrice { get; set; }
+
+        //for strategy to determin amount
+        public decimal Weight { get; set; }
 
         public decimal CurrentGain
         {

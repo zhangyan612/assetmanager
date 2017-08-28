@@ -193,6 +193,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllocationsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvestmentsController.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Controllers\PortfoliosController.cs" />
     <Compile Include="Controllers\PositionsController.cs" />
     <Compile Include="Controllers\StrategiesController.cs" />
+    <Compile Include="Controllers\WatchListsController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,7 +242,20 @@
     <Compile Include="Migrations\201708280630154_updateTrade.Designer.cs">
       <DependentUpon>201708280630154_updateTrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708282040137_addAllocation.cs" />
+    <Compile Include="Migrations\201708282040137_addAllocation.Designer.cs">
+      <DependentUpon>201708282040137_addAllocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282105396_updateAllocation.cs" />
+    <Compile Include="Migrations\201708282105396_updateAllocation.Designer.cs">
+      <DependentUpon>201708282105396_updateAllocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282211434_updatePositionWeight.cs" />
+    <Compile Include="Migrations\201708282211434_updatePositionWeight.Designer.cs">
+      <DependentUpon>201708282211434_updatePositionWeight.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Allocation.cs" />
     <Compile Include="Models\Statistics\AlgorithmPerformance.cs" />
     <Compile Include="Models\Statistics\Extensions.cs" />
     <Compile Include="Models\Statistics\PortfolioStatistics.cs" />
@@ -253,6 +268,7 @@
     <Compile Include="Models\InvestmentAccount.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Positions.cs" />
+    <Compile Include="Models\WatchList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -314,16 +330,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Positions\Create.cshtml" />
-    <Content Include="Views\Positions\Delete.cshtml" />
-    <Content Include="Views\Positions\Details.cshtml" />
-    <Content Include="Views\Positions\Edit.cshtml" />
-    <Content Include="Views\Positions\Index.cshtml" />
-    <Content Include="Views\Portfolios\Create.cshtml" />
-    <Content Include="Views\Portfolios\Delete.cshtml" />
-    <Content Include="Views\Portfolios\Details.cshtml" />
-    <Content Include="Views\Portfolios\Edit.cshtml" />
-    <Content Include="Views\Portfolios\Index.cshtml" />
     <Content Include="Views\Investments\Create.cshtml" />
     <Content Include="Views\Investments\Delete.cshtml" />
     <Content Include="Views\Investments\Details.cshtml" />
@@ -334,6 +340,26 @@
     <Content Include="Views\Strategies\Details.cshtml" />
     <Content Include="Views\Strategies\Edit.cshtml" />
     <Content Include="Views\Strategies\Index.cshtml" />
+    <Content Include="Views\WatchLists\Create.cshtml" />
+    <Content Include="Views\WatchLists\Delete.cshtml" />
+    <Content Include="Views\WatchLists\Details.cshtml" />
+    <Content Include="Views\WatchLists\Edit.cshtml" />
+    <Content Include="Views\WatchLists\Index.cshtml" />
+    <Content Include="Views\Allocations\Create.cshtml" />
+    <Content Include="Views\Allocations\Delete.cshtml" />
+    <Content Include="Views\Allocations\Details.cshtml" />
+    <Content Include="Views\Allocations\Edit.cshtml" />
+    <Content Include="Views\Allocations\Index.cshtml" />
+    <Content Include="Views\Portfolios\Create.cshtml" />
+    <Content Include="Views\Portfolios\Delete.cshtml" />
+    <Content Include="Views\Portfolios\Details.cshtml" />
+    <Content Include="Views\Portfolios\Edit.cshtml" />
+    <Content Include="Views\Portfolios\Index.cshtml" />
+    <Content Include="Views\Positions\Create.cshtml" />
+    <Content Include="Views\Positions\Delete.cshtml" />
+    <Content Include="Views\Positions\Details.cshtml" />
+    <Content Include="Views\Positions\Edit.cshtml" />
+    <Content Include="Views\Positions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -378,6 +404,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708280630154_updateTrade.resx">
       <DependentUpon>201708280630154_updateTrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282040137_addAllocation.resx">
+      <DependentUpon>201708282040137_addAllocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282105396_updateAllocation.resx">
+      <DependentUpon>201708282105396_updateAllocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282211434_updatePositionWeight.resx">
+      <DependentUpon>201708282211434_updatePositionWeight.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

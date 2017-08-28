@@ -75,8 +75,11 @@
             <table class="table">
                 <tr>
                     <th>Stock Name</th>
+                    <th>Holding</th>
+                    <th>Cost Price</th>
                     <th>Current Price</th>
                     <th>Current Gain</th>
+                    <th>Weight</th>
                 </tr>
                 @foreach (var i in Model.Positions)
                 {
@@ -85,10 +88,19 @@
                             @Html.DisplayFor(modelItem => i.StockName)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => i.HoldingAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => i.CostPrice)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => i.CurrentPrice)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => i.CurrentGain)
+                        </td>
+                        <td>
+                            @String.Format("{0:P2}", i.Weight)
                         </td>
                     </tr>
                 }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>My Open Positions</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            Account
+            @Html.DisplayNameFor(model => model.Account.AccountName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Strategy.Name)
@@ -25,29 +25,19 @@
             @Html.DisplayNameFor(model => model.Symbol)
         </th>
         <th>
-            Holding
+            @Html.DisplayNameFor(model => model.HoldingAmount)
         </th>
         <th>
-            Sellable
+            @Html.DisplayNameFor(model => model.SellableAmount)
         </th>
         <th>
-            Cost Price
+            @Html.DisplayNameFor(model => model.CostPrice)
         </th>
         <th>
-            Current Price
-        </th>
-
-        <th>
-            Current Gain
+            @Html.DisplayNameFor(model => model.CurrentPrice)
         </th>
         <th>
-            Gain Percentage
-        </th>
-        <th>
-            Total Value
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FundNumber)
+            @Html.DisplayNameFor(model => model.Weight)
         </th>
         <th></th>
     </tr>
@@ -78,18 +68,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.CurrentPrice)
         </td>
-
         <td>
-            @Html.DisplayFor(modelItem => item.CurrentGain)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GainPercent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalValue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FundNumber)
+            @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PositionId }) |
