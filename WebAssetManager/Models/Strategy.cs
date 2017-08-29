@@ -21,6 +21,14 @@ namespace WebAssetManager.Models
         //In case needed by strategy
         public decimal InitialBalance { get; set; }
         //public decimal CurrentBalance { get; set; }
+        public decimal TotalReturn { get; set; }
+        public decimal ExpectedAnnualReturn { get; set; }
+        public int RebalancePeriod { get; set; }
+        public decimal MaxDrawDown { get; set; }
+        public int StockHolding { get; set; }
+        public DateTime BacktestStart { get; set; }
+        public DateTime BacktestEnd { get; set; }
+        public string Type { get; set; }
     }
 
 

@@ -258,6 +258,10 @@
     <Compile Include="Migrations\201708290331514_updatePosition.Designer.cs">
       <DependentUpon>201708290331514_updatePosition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708290423291_EnrichStrategy.cs" />
+    <Compile Include="Migrations\201708290423291_EnrichStrategy.Designer.cs">
+      <DependentUpon>201708290423291_EnrichStrategy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
     <Compile Include="Models\Statistics\AlgorithmPerformance.cs" />
@@ -339,11 +343,11 @@
     <Content Include="Views\Investments\Details.cshtml" />
     <Content Include="Views\Investments\Edit.cshtml" />
     <Content Include="Views\Investments\Index.cshtml" />
-    <Content Include="Views\Strategies\Create.cshtml" />
-    <Content Include="Views\Strategies\Delete.cshtml" />
-    <Content Include="Views\Strategies\Details.cshtml" />
-    <Content Include="Views\Strategies\Edit.cshtml" />
-    <Content Include="Views\Strategies\Index.cshtml" />
+    <Content Include="Views\Strategies-old\Create.cshtml" />
+    <Content Include="Views\Strategies-old\Delete.cshtml" />
+    <Content Include="Views\Strategies-old\Details.cshtml" />
+    <Content Include="Views\Strategies-old\Edit.cshtml" />
+    <Content Include="Views\Strategies-old\Index.cshtml" />
     <Content Include="Views\Allocations\Create.cshtml" />
     <Content Include="Views\Allocations\Delete.cshtml" />
     <Content Include="Views\Allocations\Details.cshtml" />
@@ -420,6 +424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708290331514_updatePosition.resx">
       <DependentUpon>201708290331514_updatePosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708290423291_EnrichStrategy.resx">
+      <DependentUpon>201708290423291_EnrichStrategy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
