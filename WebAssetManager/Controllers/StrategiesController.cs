@@ -46,7 +46,7 @@ namespace WebAssetManager.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password")] Strategy strategy)
+        public ActionResult Create([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password,InitialBalance,TotalReturn,ExpectedAnnualReturn,RebalancePeriod,MaxDrawDown,StockHolding,BacktestStart,BacktestEnd,Type")] Strategy strategy)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace WebAssetManager.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password")] Strategy strategy)
+        public ActionResult Edit([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password,InitialBalance,TotalReturn,ExpectedAnnualReturn,RebalancePeriod,MaxDrawDown,StockHolding,BacktestStart,BacktestEnd,Type")] Strategy strategy)
         {
             if (ModelState.IsValid)
             {

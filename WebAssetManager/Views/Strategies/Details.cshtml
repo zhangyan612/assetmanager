@@ -1,0 +1,147 @@
+﻿@model WebAssetManager.Models.Strategy
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Strategy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Source)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequireLogin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequireLogin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InitialBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitialBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalReturn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalReturn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedAnnualReturn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedAnnualReturn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RebalancePeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RebalancePeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxDrawDown)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxDrawDown)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockHolding)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockHolding)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BacktestStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BacktestStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BacktestEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BacktestEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StrategyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

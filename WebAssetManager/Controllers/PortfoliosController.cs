@@ -10,6 +10,7 @@ using WebAssetManager.Models;
 
 namespace WebAssetManager.Controllers
 {
+    [Authorize]
     public class PortfoliosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

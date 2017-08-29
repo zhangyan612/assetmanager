@@ -10,6 +10,7 @@ using WebAssetManager.Models;
 
 namespace WebAssetManager.Controllers
 {
+    [Authorize]
     public class WatchListsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
