@@ -345,11 +345,6 @@
     <Content Include="Views\Investments\Details.cshtml" />
     <Content Include="Views\Investments\Edit.cshtml" />
     <Content Include="Views\Investments\Index.cshtml" />
-    <Content Include="Views\Strategies-old\Create.cshtml" />
-    <Content Include="Views\Strategies-old\Delete.cshtml" />
-    <Content Include="Views\Strategies-old\Details.cshtml" />
-    <Content Include="Views\Strategies-old\Edit.cshtml" />
-    <Content Include="Views\Strategies-old\Index.cshtml" />
     <Content Include="Views\Allocations\Create.cshtml" />
     <Content Include="Views\Allocations\Delete.cshtml" />
     <Content Include="Views\Allocations\Details.cshtml" />
