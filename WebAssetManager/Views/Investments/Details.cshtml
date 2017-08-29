@@ -153,7 +153,7 @@
         </dd>
 
 
-        <dt>
+        @*<dt>
             Strategy Traget Allocation
         </dt>
 
@@ -175,7 +175,7 @@
                     </tr>
                 }
             </table>
-        </dd>
+        </dd>*@
 
 
         <dt>
@@ -185,15 +185,17 @@
     {
         
         <dd>
-            <p>@i.Strategy.Name</p>
+            <p><b>@i.Strategy.Name</b> | Allocation: @i.Amount</p>
             <table class="table">
                 <tr>
                     <th>Stock Name</th>
                     <th>Holding</th>
-                    <th>Cost Price</th>
+                    <th>Cost</th>
                     <th>Current Price</th>
-                    <th>Current Gain</th>
+                    <th>Gain</th>
                     <th>Weight</th>
+                    <th>Target Allocation</th>
+
 
                 </tr>
                 @foreach(var a in i.Strategy.Positions){
@@ -216,6 +218,9 @@
                         </td>
                         <td>
                             @String.Format("{0:P2}", a.Weight)
+                        </td>
+                        <td>
+                            @String.Format("{0:n1}", ((i.Amount * a.Weight) / a.CurrentPrice))
                         </td>
 
                     </tr>

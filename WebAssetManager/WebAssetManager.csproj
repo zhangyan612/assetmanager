@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201708282211434_updatePositionWeight.Designer.cs">
       <DependentUpon>201708282211434_updatePositionWeight.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708290331514_updatePosition.cs" />
+    <Compile Include="Migrations\201708290331514_updatePosition.Designer.cs">
+      <DependentUpon>201708290331514_updatePosition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Allocation.cs" />
     <Compile Include="Models\Statistics\AlgorithmPerformance.cs" />
@@ -340,11 +344,6 @@
     <Content Include="Views\Strategies\Details.cshtml" />
     <Content Include="Views\Strategies\Edit.cshtml" />
     <Content Include="Views\Strategies\Index.cshtml" />
-    <Content Include="Views\WatchLists\Create.cshtml" />
-    <Content Include="Views\WatchLists\Delete.cshtml" />
-    <Content Include="Views\WatchLists\Details.cshtml" />
-    <Content Include="Views\WatchLists\Edit.cshtml" />
-    <Content Include="Views\WatchLists\Index.cshtml" />
     <Content Include="Views\Allocations\Create.cshtml" />
     <Content Include="Views\Allocations\Delete.cshtml" />
     <Content Include="Views\Allocations\Details.cshtml" />
@@ -360,6 +359,11 @@
     <Content Include="Views\Positions\Details.cshtml" />
     <Content Include="Views\Positions\Edit.cshtml" />
     <Content Include="Views\Positions\Index.cshtml" />
+    <Content Include="Views\WatchLists\Create.cshtml" />
+    <Content Include="Views\WatchLists\Delete.cshtml" />
+    <Content Include="Views\WatchLists\Details.cshtml" />
+    <Content Include="Views\WatchLists\Edit.cshtml" />
+    <Content Include="Views\WatchLists\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -413,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708282211434_updatePositionWeight.resx">
       <DependentUpon>201708282211434_updatePositionWeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708290331514_updatePosition.resx">
+      <DependentUpon>201708290331514_updatePosition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

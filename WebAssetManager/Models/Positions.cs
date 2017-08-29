@@ -34,7 +34,7 @@ namespace WebAssetManager.Models
         public decimal CurrentPrice { get; set; }
 
         //for strategy to determin amount
-        public decimal Weight { get; set; }
+        public decimal? Weight { get; set; }
 
         public decimal CurrentGain
         {

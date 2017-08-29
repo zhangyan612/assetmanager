@@ -14,14 +14,21 @@ namespace WebAssetManager.Models
                  
         public int AccountId { get; set; }
 
-        private DateTime? dateCreated;
 
-        public DateTime CreatedDate
-        {
-            get { return dateCreated ?? DateTime.Now; }
-            set { dateCreated = value; }
-        }
+        public DateTime CreatedDate { get; set; }
+
+        //private DateTime? dateCreated;
+        //{
+        //    get { return dateCreated ?? DateTime.Now; }
+        //    set { dateCreated = value; }
+        //}
 
         public virtual InvestmentAccount Account { get; set; }
+
+        public WatchList()
+        {
+            CreatedDate = DateTime.Now;
+        }
+
     }
 }

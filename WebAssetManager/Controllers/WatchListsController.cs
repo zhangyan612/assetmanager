@@ -39,7 +39,7 @@ namespace WebAssetManager.Controllers
         // GET: WatchLists/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId");
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName");
             return View();
         }
 
@@ -48,16 +48,17 @@ namespace WebAssetManager.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StockName,Symbol,Description,AccountId,CreatedDate")] WatchList watchList)
+        public ActionResult Create([Bind(Include = "Id,StockName,Symbol,Description,AccountId")] WatchList watchList)
         {
             if (ModelState.IsValid)
             {
+                watchList.CreatedDate = DateTime.Now;
                 db.WatchLists.Add(watchList);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", watchList.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", watchList.AccountId);
             return View(watchList);
         }
 
@@ -73,7 +74,7 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", watchList.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", watchList.AccountId);
             return View(watchList);
         }
 
@@ -90,7 +91,7 @@ namespace WebAssetManager.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "PortfolioId", watchList.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", watchList.AccountId);
             return View(watchList);
         }
 

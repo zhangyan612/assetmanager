@@ -18,6 +18,7 @@ namespace WebAssetManager.Models
         public CurrencySymbols Currency { get; set; }
         public string WebUrl { get; set; }
 
+        // nullable check
         public virtual ICollection<Position> Positions { get; set; }
         public virtual ICollection<Allocation> Allocations { get; set; }
 
@@ -26,7 +27,7 @@ namespace WebAssetManager.Models
         {
             get
             {
-                return (from i in Positions select i.TotalValue).Sum();
+                return Positions == null? 0 : (from i in Positions select i.TotalValue).Sum();
             }
         }
 
@@ -42,7 +43,7 @@ namespace WebAssetManager.Models
         {
             get
             {
-                return (from i in Positions select i.CurrentGain).Sum();
+                return Positions == null ? 0 : (from i in Positions select i.CurrentGain).Sum();
             }
         }
 
@@ -58,7 +59,7 @@ namespace WebAssetManager.Models
         {
             get
             {
-                return (from i in Allocations select i.Amount).Sum();
+                return Allocations == null ? 0 : (from i in Allocations select i.Amount).Sum();
             }
         }
 
