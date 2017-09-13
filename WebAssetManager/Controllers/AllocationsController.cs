@@ -40,18 +40,18 @@ namespace WebAssetManager.Controllers
         // GET: Allocations/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName");
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name");
+            string UserId = ViewBag.UserId;
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == UserId), "Id", "AccountName");
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == UserId), "StrategyId", "Name");
             return View();
         }
 
         // POST: Allocations/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,StrategyId,AccountId,Amount")] Allocation allocation)
         {
+            string UserId = ViewBag.UserId;
             if (ModelState.IsValid)
             {
                 db.Allocations.Add(allocation);
@@ -59,14 +59,15 @@ namespace WebAssetManager.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", allocation.AccountId);
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", allocation.StrategyId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == UserId), "Id", "AccountName", allocation.AccountId);
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == UserId), "StrategyId", "Name", allocation.StrategyId);
             return View(allocation);
         }
 
         // GET: Allocations/Edit/5
         public ActionResult Edit(int? id)
         {
+            string UserId = ViewBag.UserId;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -76,26 +77,25 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", allocation.AccountId);
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", allocation.StrategyId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == UserId), "Id", "AccountName", allocation.AccountId);
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == UserId), "StrategyId", "Name", allocation.StrategyId);
             return View(allocation);
         }
 
         // POST: Allocations/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,StrategyId,AccountId,Amount")] Allocation allocation)
         {
+            string UserId = ViewBag.UserId;
             if (ModelState.IsValid)
             {
                 db.Entry(allocation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", allocation.AccountId);
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", allocation.StrategyId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == UserId), "Id", "AccountName", allocation.AccountId);
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == UserId), "StrategyId", "Name", allocation.StrategyId);
             return View(allocation);
         }
 

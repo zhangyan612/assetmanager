@@ -18,7 +18,8 @@ namespace WebAssetManager.Controllers
         // GET: WatchLists
         public ActionResult Index()
         {
-            var watchLists = db.WatchLists.Include(w => w.Account);
+            string UserId = ViewBag.UserId;
+            var watchLists = db.WatchLists.Include(w => w.Account).Where(a =>a.UserId == UserId);
             return View(watchLists.ToList());
         }
 
@@ -34,23 +35,28 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (watchList.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(watchList);
         }
 
         // GET: WatchLists/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName");
+            string UserId = ViewBag.UserId;
+
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == UserId), "Id", "AccountName");
             return View();
         }
 
         // POST: WatchLists/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,StockName,Symbol,Description,AccountId")] WatchList watchList)
         {
+            watchList.UserId = ViewBag.UserId;
             if (ModelState.IsValid)
             {
                 watchList.CreatedDate = DateTime.Now;
@@ -59,7 +65,7 @@ namespace WebAssetManager.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", watchList.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == watchList.UserId), "Id", "AccountName", watchList.AccountId);
             return View(watchList);
         }
 
@@ -75,24 +81,30 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", watchList.AccountId);
+            if (watchList.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == watchList.UserId), "Id", "AccountName", watchList.AccountId);
             return View(watchList);
         }
 
         // POST: WatchLists/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,StockName,Symbol,Description,AccountId,CreatedDate")] WatchList watchList)
         {
+            if (watchList.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(watchList).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", watchList.AccountId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == watchList.UserId), "Id", "AccountName", watchList.AccountId);
             return View(watchList);
         }
 
@@ -108,6 +120,10 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (watchList.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(watchList);
         }
 
@@ -117,6 +133,10 @@ namespace WebAssetManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             WatchList watchList = db.WatchLists.Find(id);
+            if (watchList.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             db.WatchLists.Remove(watchList);
             db.SaveChanges();
             return RedirectToAction("Index");

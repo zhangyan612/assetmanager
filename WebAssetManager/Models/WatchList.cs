@@ -23,6 +23,8 @@ namespace WebAssetManager.Models
         //    set { dateCreated = value; }
         //}
 
+        public string UserId { get; set; }
+
         public virtual InvestmentAccount Account { get; set; }
 
         public WatchList()

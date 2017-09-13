@@ -13,9 +13,9 @@ namespace WebAssetManager.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Unauthorized()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "You are unauthorized to access this page";
 
             return View();
         }

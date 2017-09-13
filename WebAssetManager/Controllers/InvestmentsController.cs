@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,10 +16,15 @@ namespace WebAssetManager.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //public InvestmentsController()
+        //{
+        //    UserId = User.Identity.GetUserId();
+        //}
         // GET: Investments
         public ActionResult Index()
         {
-            var investmentAccounts = db.InvestmentAccounts.Include(i => i.Portfolio);
+            string UserId = ViewBag.UserId;
+            var investmentAccounts = db.InvestmentAccounts.Include(i => i.Portfolio).Where(a => a.UserId == UserId);
             return View(investmentAccounts.ToList());
         }
 
@@ -34,13 +40,18 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (investmentAccount.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(investmentAccount);
         }
 
         // GET: Investments/Create
         public ActionResult Create()
         {
-            ViewBag.PortfolioId = new SelectList(db.Portfolios, "PortfolioId", "Name");
+            string UserId = ViewBag.UserId;
+            ViewBag.PortfolioId = new SelectList(db.Portfolios.Where(a => a.UserId == UserId), "PortfolioId", "Name");
             return View();
         }
 
@@ -51,12 +62,13 @@ namespace WebAssetManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                investmentAccount.UserId = ViewBag.UserId;
                 db.InvestmentAccounts.Add(investmentAccount);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PortfolioId = new SelectList(db.Portfolios, "PortfolioId", "Name", investmentAccount.PortfolioId);
+            ViewBag.PortfolioId = new SelectList(db.Portfolios.Where(a => a.UserId == investmentAccount.UserId), "PortfolioId", "Name", investmentAccount.PortfolioId);
             return View(investmentAccount);
         }
 
@@ -72,7 +84,12 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PortfolioId = new SelectList(db.Portfolios, "PortfolioId", "Name", investmentAccount.PortfolioId);
+            if (investmentAccount.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
+
+            ViewBag.PortfolioId = new SelectList(db.Portfolios.Where(a => a.UserId == investmentAccount.UserId), "PortfolioId", "Name", investmentAccount.PortfolioId);
             return View(investmentAccount);
         }
 
@@ -81,13 +98,17 @@ namespace WebAssetManager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,PortfolioId,AccountName,Type,Balance,Currency,WebUrl,Returns,UserName,Password")] InvestmentAccount investmentAccount)
         {
+            if (investmentAccount.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(investmentAccount).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PortfolioId = new SelectList(db.Portfolios, "PortfolioId", "Name", investmentAccount.PortfolioId);
+            ViewBag.PortfolioId = new SelectList(db.Portfolios.Where(a => a.UserId == investmentAccount.UserId), "PortfolioId", "Name", investmentAccount.PortfolioId);
             return View(investmentAccount);
         }
 
@@ -103,6 +124,10 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (investmentAccount.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(investmentAccount);
         }
 
@@ -112,6 +137,10 @@ namespace WebAssetManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             InvestmentAccount investmentAccount = db.InvestmentAccounts.Find(id);
+            if (investmentAccount.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             db.InvestmentAccounts.Remove(investmentAccount);
             db.SaveChanges();
             return RedirectToAction("Index");

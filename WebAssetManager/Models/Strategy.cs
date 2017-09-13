@@ -37,6 +37,9 @@ namespace WebAssetManager.Models
         public string Type { get; set; }
         //public bool Owner { get; set; }
         //public bool Tracking { get; set; }
+
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 
 

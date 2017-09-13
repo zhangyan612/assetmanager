@@ -22,7 +22,9 @@ namespace WebAssetManager.Models
         public virtual ICollection<Position> Positions { get; set; }
         public virtual ICollection<Allocation> Allocations { get; set; }
 
-
+        /// <summary>
+        /// stock holdings which means risk exposure level
+        /// </summary>
         public decimal Exposure
         {
             get
@@ -31,6 +33,9 @@ namespace WebAssetManager.Models
             }
         }
 
+        /// <summary>
+        /// account cash portion
+        /// </summary>
         public decimal AvailableCash
         {
             get
@@ -39,6 +44,9 @@ namespace WebAssetManager.Models
             }
         }
 
+        /// <summary>
+        /// money made in the account
+        /// </summary>
         public decimal ReturnAmount
         {
             get
@@ -46,7 +54,9 @@ namespace WebAssetManager.Models
                 return Positions == null ? 0 : (from i in Positions select i.CurrentGain).Sum();
             }
         }
-
+        /// <summary>
+        /// percentage of return
+        /// </summary>
         public decimal ReturnPercent
         {
             get
@@ -79,6 +89,8 @@ namespace WebAssetManager.Models
         public string Password { get; set; }
 
         public virtual Portfolio Portfolio { get; set; }
+
+        public string UserId { get; set; }
     }
 
     public enum AccountType

@@ -10,7 +10,6 @@ using WebAssetManager.Models;
 
 namespace WebAssetManager.Controllers
 {
-    [Authorize]
     public class PortfoliosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,7 +17,8 @@ namespace WebAssetManager.Controllers
         // GET: Portfolios
         public ActionResult Index()
         {
-            return View(db.Portfolios.ToList());
+            string UserId = ViewBag.UserId;
+            return View(db.Portfolios.ToList().Where(a=>a.UserId == UserId));
         }
 
         // GET: Portfolios/Details/5
@@ -33,6 +33,10 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (portfolio.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(portfolio);
         }
 
@@ -43,12 +47,11 @@ namespace WebAssetManager.Controllers
         }
 
         // POST: Portfolios/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PortfolioId,UserId,Name,CreatedDate,TotalReturn")] Portfolio portfolio)
         {
+            portfolio.UserId = ViewBag.UserId;
             if (ModelState.IsValid)
             {
                 db.Portfolios.Add(portfolio);
@@ -71,16 +74,22 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (portfolio.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(portfolio);
         }
 
         // POST: Portfolios/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PortfolioId,UserId,Name,CreatedDate,TotalReturn")] Portfolio portfolio)
         {
+            if (portfolio.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(portfolio).State = EntityState.Modified;
@@ -102,6 +111,10 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (portfolio.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(portfolio);
         }
 
@@ -111,6 +124,10 @@ namespace WebAssetManager.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Portfolio portfolio = db.Portfolios.Find(id);
+            if (portfolio.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             db.Portfolios.Remove(portfolio);
             db.SaveChanges();
             return RedirectToAction("Index");

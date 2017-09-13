@@ -19,5 +19,82 @@ namespace WebAssetManager.Models
 
         //public virtual ApplicationUser User { get; set; }
         public virtual ICollection<InvestmentAccount> Accounts { get; set; }
+
+        /// <summary>
+        /// total value of accounts
+        /// </summary>
+        public decimal TotalBalance
+        {
+            get
+            {
+                return Accounts == null ? 0 : (from i in Accounts select i.Balance).Sum();
+            }
+        }
+
+        /// <summary>
+        /// total value of stock holdings
+        /// </summary>
+        public decimal Exposure
+        {
+            get
+            {
+                return Accounts == null ? 0 : (from i in Accounts select i.Exposure).Sum();
+            }
+        }
+
+        /// <summary>
+        /// total cash that's available
+        /// </summary>
+        public decimal AvailableCash
+        {
+            get
+            {
+                return TotalBalance - Exposure;
+            }
+        }
+
+        /// <summary>
+        /// total return amount 
+        /// </summary>
+        public decimal ReturnAmount
+        {
+            get
+            {
+                return Accounts == null ? 0 : (from i in Accounts select i.ReturnAmount).Sum();
+            }
+        }
+
+        /// <summary>
+        /// Percentage of total return
+        /// </summary>
+        public decimal ReturnPercent
+        {
+            get
+            {
+                return ReturnAmount / TotalBalance;
+            }
+        }
+
+        /// <summary>
+        /// Strategy that an account is allocated to
+        /// </summary>
+        public decimal TotalAllocated
+        {
+            get
+            {
+                return Accounts == null ? 0 : (from i in Accounts select i.TotalAllocated).Sum();
+            }
+        }
+
+        /// <summary>
+        /// percentage of a portfolio that's traded based on strategy
+        /// </summary>
+        public decimal AllocatedPercent
+        {
+            get
+            {
+                return TotalAllocated / TotalBalance;
+            }
+        }
     }
 }

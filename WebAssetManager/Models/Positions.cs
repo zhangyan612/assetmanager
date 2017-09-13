@@ -63,5 +63,7 @@ namespace WebAssetManager.Models
 
         public virtual InvestmentAccount Account { get; set; }
         public virtual Strategy Strategy { get; set; }
+
+        public string UserId { get; set; }
     }
 }

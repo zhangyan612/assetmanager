@@ -18,7 +18,8 @@ namespace WebAssetManager.Controllers
         // GET: Positions
         public ActionResult Index()
         {
-            var positions = db.Positions.Include(p => p.Account).Include(p => p.Strategy);
+            string userId = ViewBag.UserId;
+            var positions = db.Positions.Include(p => p.Account).Include(p => p.Strategy).Where(a=> a.UserId == userId);
             return View(positions.ToList());
         }
 
@@ -34,33 +35,36 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (position.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(position);
         }
 
         // GET: Positions/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName");
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name");
+            string userId = ViewBag.UserId;
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == userId), "Id", "AccountName");
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == userId), "StrategyId", "Name");
             return View();
         }
 
         // POST: Positions/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PositionId,AccountId,StrategyId,StockName,Symbol,Description,HoldingAmount,SellableAmount,CostPrice,CurrentPrice,Weight,FundNumber")] Position position)
         {
+            position.UserId = ViewBag.UserId;
             if (ModelState.IsValid)
             {
                 db.Positions.Add(position);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", position.AccountId);
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", position.StrategyId);
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == position.UserId), "Id", "AccountName", position.AccountId);
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == position.UserId), "StrategyId", "Name", position.StrategyId);
             return View(position);
         }
 
@@ -76,14 +80,16 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", position.AccountId);
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", position.StrategyId);
+            if (position.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == position.UserId), "Id", "AccountName", position.AccountId);
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == position.UserId), "StrategyId", "Name", position.StrategyId);
             return View(position);
         }
 
         // POST: Positions/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PositionId,AccountId,StrategyId,StockName,Symbol,Description,HoldingAmount,SellableAmount,CostPrice,CurrentPrice,Weight,FundNumber")] Position position)
@@ -94,8 +100,12 @@ namespace WebAssetManager.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.InvestmentAccounts, "Id", "AccountName", position.AccountId);
-            ViewBag.StrategyId = new SelectList(db.Strategies, "StrategyId", "Name", position.StrategyId);
+            if (position.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
+            ViewBag.AccountId = new SelectList(db.InvestmentAccounts.Where(a => a.UserId == position.UserId), "Id", "AccountName", position.AccountId);
+            ViewBag.StrategyId = new SelectList(db.Strategies.Where(a => a.UserId == position.UserId), "StrategyId", "Name", position.StrategyId);
             return View(position);
         }
 
@@ -111,6 +121,10 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (position.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(position);
         }
 
@@ -120,6 +134,10 @@ namespace WebAssetManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Position position = db.Positions.Find(id);
+            if (position.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             db.Positions.Remove(position);
             db.SaveChanges();
             return RedirectToAction("Index");

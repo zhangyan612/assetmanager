@@ -18,7 +18,8 @@ namespace WebAssetManager.Controllers
         // GET: Strategies
         public ActionResult Index()
         {
-            return View(db.Strategies.ToList());
+            var userId = ViewBag.UserId;
+            return View(db.Strategies.ToList().Where(a => a.UserId == userId));
         }
 
         // GET: Strategies/Details/5
@@ -33,6 +34,11 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (strategy.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
+
             return View(strategy);
         }
 
@@ -43,19 +49,17 @@ namespace WebAssetManager.Controllers
         }
 
         // POST: Strategies/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password,InitialBalance,TotalReturn,ExpectedAnnualReturn,RebalancePeriod,MaxDrawDown,StockHolding,BacktestStart,BacktestEnd,Type")] Strategy strategy)
         {
+            strategy.UserId = ViewBag.UserId;
             if (ModelState.IsValid)
             {
                 db.Strategies.Add(strategy);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(strategy);
         }
 
@@ -71,16 +75,22 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (strategy.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(strategy);
         }
 
         // POST: Strategies/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StrategyId,Name,Url,Description,Source,RequireLogin,LoginUserName,Password,InitialBalance,TotalReturn,ExpectedAnnualReturn,RebalancePeriod,MaxDrawDown,StockHolding,BacktestStart,BacktestEnd,Type")] Strategy strategy)
         {
+            if (strategy.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(strategy).State = EntityState.Modified;
@@ -102,6 +112,10 @@ namespace WebAssetManager.Controllers
             {
                 return HttpNotFound();
             }
+            if (strategy.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             return View(strategy);
         }
 
@@ -111,6 +125,10 @@ namespace WebAssetManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Strategy strategy = db.Strategies.Find(id);
+            if (strategy.UserId != ViewBag.UserId)
+            {
+                return RedirectToAction("Unauthorized", "Home");
+            }
             db.Strategies.Remove(strategy);
             db.SaveChanges();
             return RedirectToAction("Index");
