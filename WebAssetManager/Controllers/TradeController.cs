@@ -19,10 +19,10 @@ namespace WebAssetManager.Controllers
                 return Json("Bad request", JsonRequestBehavior.DenyGet);
             }
             string result = "";
-            var data = string.Join(";", symbol, price, amount);
+            var data = string.Join(";", strategy, symbol, price, amount);
             using (var redis = new RedisClient("123.206.205.245", 6379))
             {
-                redis.PublishAsync(strategy, data);
+                redis.PublishAsync("Orders", data);
                 result = redis.GetAsync(strategy).Result;
             }
             return Json(result, JsonRequestBehavior.DenyGet);
