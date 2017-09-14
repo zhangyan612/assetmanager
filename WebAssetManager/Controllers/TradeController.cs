@@ -22,12 +22,7 @@ namespace WebAssetManager.Controllers
             var data = string.Join(";", symbol, price, amount);
             using (var redis = new RedisClient("123.206.205.245", 6379))
             {
-                // automatic MULTI/EXEC pipeline: start a pipe that is also a MULTI/EXEC transaction
-                //redis.StartPipeTransaction();
-                //redis.Set(strategy, data);
-                //redis.PSubscribe("*");
-                redis.Publish(strategy, data);
-                //object[] result = redis.EndPipe(); // transaction is EXEC'd automatically if DISCARD was not called first
+                redis.PublishAsync(strategy, data);
                 result = redis.GetAsync(strategy).Result;
             }
             return Json(result, JsonRequestBehavior.DenyGet);
