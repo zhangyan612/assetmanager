@@ -213,6 +213,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PortfoliosController.cs" />
     <Compile Include="Controllers\PositionsController.cs" />
+    <Compile Include="Controllers\PositionSyncController.cs" />
     <Compile Include="Controllers\StrategiesController.cs" />
     <Compile Include="Controllers\TradeController.cs" />
     <Compile Include="Controllers\UpdateController.cs" />
