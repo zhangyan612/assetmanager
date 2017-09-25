@@ -30,6 +30,8 @@ namespace WebAssetManager.Controllers
                 StockName = a.StockName,
                 Symbol = a.Symbol,
                 HoldingAmount = a.HoldingAmount,
+                SellableAmount = a.SellableAmount,
+                CostPrice = a.CostPrice,
                 CurrentPrice = a.CurrentPrice
             }).AsEnumerable();
 
