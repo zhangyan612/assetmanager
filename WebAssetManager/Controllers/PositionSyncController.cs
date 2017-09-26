@@ -32,7 +32,9 @@ namespace WebAssetManager.Controllers
                 HoldingAmount = a.HoldingAmount,
                 SellableAmount = a.SellableAmount,
                 CostPrice = a.CostPrice,
-                CurrentPrice = a.CurrentPrice
+                CurrentPrice = a.CurrentPrice,
+                Account = a.AccountId,
+                Strategy = a.StrategyId
             }).AsEnumerable();
 
             return positions;
